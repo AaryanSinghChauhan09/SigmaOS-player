@@ -1,12 +1,19 @@
-# SigmaOS-player
+# SigmaOS Player
 
-Video player (mpv-backed)
+Python CLI that plans mpv playback arguments and parses playlists, metadata,
+and seek requests. It prints a shell-escaped command plan for the caller.
 
-Engine: media_player
-Language: shell
-Visibility: public
+## Playback boundary
 
-## SigmaOS multi-repository ecosystem
+The current CLI does not execute mpv or provide a graphical player. A printed
+plan does not establish that mpv is installed, that a media URL is reachable,
+or that playback will succeed. Keep process execution as a separate layer that
+passes an argument vector directly rather than evaluating the printed string
+through a shell.
 
-- **Upstream inspirations**: - https://github.com/linuxmint/xplayer
-- https://github.com/debpalash/Opal
+## Development
+
+`make test` runs deterministic planning and parsing checks without spawning
+mpv or accessing the network. The project studies [Xplayer](https://github.com/linuxmint/xplayer)
+and [Opal](https://github.com/debpalash/Opal) as references; it does not claim
+feature parity with either player.
